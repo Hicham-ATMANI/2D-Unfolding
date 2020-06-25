@@ -1,2 +1,13 @@
-# 2D-Unfolding
-2D-Unfolding
+Building
+========
+
+Use GNU make. Just type
+
+  make
+
+to build the RooUnfold shared library.
+
+Running
+=======
+
+  python run_2d/Unfolding.py
