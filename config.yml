@@ -1,0 +1,147 @@
+Lum             :  339.8        # 256.827(5TeV) and 339.8(13TeV)
+Energy          :  13           # Touts les choix : 13, 5
+Channel         :  Wminusmunu    # Touts les choix :
+Charge          :  minusmunu     
+Bins            :  Large        # Touts les choix : Large, Small
+Variable        :  muEta        # Touts les choix : elEta, elPt, mT, WpT, MuPt
+Electron        :  0
+Niterations     :  9
+
+# Nominal for data and Simulation
+
+Wplusenu5_data     : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusenu_DATA_5TeV/Nominal/data17_WZ_lowMu_repro_5TeV.root
+Wplusenu5_BSdata   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusenu_DATA_5TeV/Nominal/data17_WZ_lowMu_repro_5TeV.root
+Wplusenu5_MC       : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusenu_MC_5TeV/Nominal/mc16_5TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e4916_s3238_r10243_r10210_p3665.root
+Wplusenu5_BSMC     : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusenu_MC_5TeV/Nominal/mc16_5TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e4916_s3238_r10243_r10210_p3665.root
+
+Wplusmunu5_data    : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusmunu_DATA_5TeV/Nominal/data17_WZ_lowMu_repro_5TeV.root
+Wplusmunu5_BSdata  : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusmunu_DATA_5TeV/Bootstrap/data17_WZ_lowMu_repro_5TeV.root
+Wplusmunu5_MC      : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusmunu_MC_5TeV/Nominal/mc16_5TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e4916_s3238_r10243_r10210_p3665.root
+Wplusmunu5_BSMC    : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusmunu_MC_5TeV/Bootstrap/mc16_5TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e4916_s3238_r10243_r10210_p3665.root
+
+Wminusenu5_data    : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusenu_DATA_5TeV/Nominal/data17_WZ_lowMu_repro_5TeV.root
+Wminusenu5_MC      : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusenu_MC_5TeV/Nominal/mc16_5TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e4916_s3238_r10243_r10210_p3665.root
+Wminusenu5_BSMC    : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusenu_MC_5TeV/Nominal/mc16_5TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e4916_s3238_r10243_r10210_p3665.root
+Wminusenu5_BSdata  : /eos/user/h/hatmani/OfficialDataSets/pTWanalysis_wminusenu_DATA_5TeV/Bootstrap/data17_WZ_lowMu_repro_5TeV.root
+
+Wminusmunu5_data   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusmunu_DATA_5TeV/Nominal/data17_WZ_lowMu_repro_5TeV.root
+Wminusmunu5_BSdata : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusmunu_DATA_5TeV/Bootstrap/data17_WZ_lowMu_repro_5TeV.root
+Wminusmunu5_MC     : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusmunu_MC_5TeV/Nominal/mc16_5TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e4916_s3238_r10243_r10210_p3665.root
+Wminusmunu5_BSMC   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusmunu_MC_5TeV/Bootstrap/mc16_5TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e4916_s3238_r10243_r10210_p3665.root
+
+Wplusenu13_data     : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusenu_DATA_13TeV/Nominal/data1718_WZ_lowMu_13TeV.root
+Wplusenu13_BSdata   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusenu_DATA_13TeV/Nominal/data1718_WZ_lowMu_13TeV.root
+Wplusenu13_MC       : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusenu_MC_13TeV/Nominal/mc16_13TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e3601_s3126_r10244+r11165_p3665.root
+Wplusenu13_BSMC     : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusenu_MC_13TeV/Nominal/mc16_13TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e3601_s3126_r10244+r11165_p3665.root
+
+Wplusmunu13_data    : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusmunu_DATA_13TeV/Nominal/data1718_WZ_lowMu_13TeV.root
+Wplusmunu13_BSdata  : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusmunu_DATA_13TeV/Bootstrap/data1718_WZ_lowMu_13TeV.root
+Wplusmunu13_MC      : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusmunu_MC_13TeV/Nominal/mc16_13TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e3601_s3126_r10244+r11165_p3665.root 
+Wplusmunu13_BSMC    : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusmunu_MC_13TeV/Bootstrap/mc16_13TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e3601_s3126_r10244+r11165_p3665.root 
+
+Wminusenu13_data    : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusenu_DATA_13TeV/Nominal/data1718_WZ_lowMu_13TeV.root
+Wminusenu13_MC      : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusenu_MC_13TeV/Nominal/mc16_13TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e3601_s3126_r10244+r11165_p3665.root
+Wminusenu13_BSMC    : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusenu_MC_13TeV/Nominal/mc16_13TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e3601_s3126_r10244+r11165_p3665.root
+Wminusenu13_BSdata  : /eos/user/h/hatmani/OfficialDataSets/pTWanalysis_wminusenu_DATA_5TeV/Bootstrap/data17_WZ_lowMu_repro_5TeV.root
+
+Wminusmunu13_data   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusmunu_DATA_13TeV/Nominal/data1718_WZ_lowMu_13TeV.root
+Wminusmunu13_BSdata : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusmunu_DATA_13TeV/Bootstrap/data1718_WZ_lowMu_13TeV.root
+Wminusmunu13_MC     : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusmunu_MC_13TeV/Nominal/mc16_13TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e3601_s3126_r10244+r11165_p3665.root 
+Wminusmunu13_BSMC   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusmunu_MC_13TeV/Bootstrap/mc16_13TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e3601_s3126_r10244+r11165_p3665.root 
+
+
+# Background Samples
+
+Wminusenu5_Bkgd1   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusenu5/Background_W.root
+Wminusenu5_Bkgd2   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusenu5/Background_Z.root
+Wminusenu5_Bkgd3   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusenu5/Background_dilepton.root
+Wminusenu5_Bkgd4   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusenu5/Background_MiltiJet.root
+Wminusenu5_Bkgd5   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusenu5/Background_Top.root
+
+Wplusenu5_Bkgd1   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusenu5/Background_W.root
+Wplusenu5_Bkgd2   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusenu5/Background_Z.root
+Wplusenu5_Bkgd3   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusenu5/Background_dilepton.root
+Wplusenu5_Bkgd4   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusenu5/Background_MiltiJet.root
+Wplusenu5_Bkgd5   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusenu5/Background_Top.root
+
+Wminusmunu5_Bkgd1  : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusmunu5/Background_W.root
+Wminusmunu5_Bkgd2  : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusmunu5/Background_Z.root
+Wminusmunu5_Bkgd3  : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusmunu5/Background_dilepton.root
+Wminusmunu5_Bkgd4  : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusmunu5/Background_MiltiJet.root
+Wminusmunu5_Bkgd5  : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wminusmunu5/Background_Top.root
+
+Wplusmunu5_Bkgd1   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusmunu5/Background_W.root
+Wplusmunu5_Bkgd2   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusmunu5/Background_Z.root
+Wplusmunu5_Bkgd3   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusmunu5/Background_dilepton.root
+Wplusmunu5_Bkgd4   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusmunu5/Background_MiltiJet.root
+Wplusmunu5_Bkgd5   : /eos/user/h/hatmani/DataSets/DataSets_5TeV/Background_2d/Wplusmunu5/Background_Top.root
+
+
+
+Wminusenu13_Bkgd1   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusenu13/Background_W.root
+Wminusenu13_Bkgd2   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusenu13/Background_Z.root
+Wminusenu13_Bkgd3   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusenu13/Background_dilepton.root
+Wminusenu13_Bkgd4   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusenu13/Background_MiltiJet.root
+Wminusenu13_Bkgd5   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusenu13/Background_Top.root
+
+Wplusenu13_Bkgd1   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusenu13/Background_W.root
+Wplusenu13_Bkgd2   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusenu13/Background_Z.root
+Wplusenu13_Bkgd3   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusenu13/Background_dilepton.root
+Wplusenu13_Bkgd4   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusenu13/Background_MiltiJet.root
+Wplusenu13_Bkgd5   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusenu13/Background_Top.root
+
+Wminusmunu13_Bkgd1  : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusmunu13/Background_W.root
+Wminusmunu13_Bkgd2  : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusmunu13/Background_Z.root
+Wminusmunu13_Bkgd3  : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusmunu13/Background_dilepton.root
+Wminusmunu13_Bkgd4  : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusmunu13/Background_MiltiJet.root
+Wminusmunu13_Bkgd5  : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wminusmunu13/Background_Top.root
+
+Wplusmunu13_Bkgd1   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusmunu13/Background_W.root
+Wplusmunu13_Bkgd2   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusmunu13/Background_Z.root
+Wplusmunu13_Bkgd3   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusmunu13/Background_dilepton.root
+Wplusmunu13_Bkgd4   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusmunu13/Background_MiltiJet.root
+Wplusmunu13_Bkgd5   : /eos/user/h/hatmani/DataSets/DataSets_13TeV/Background_2d/Wplusmunu13/Background_Top.root
+
+
+
+
+# Systematic Variatio 
+
+Wplusenu5_IdSF     :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusenu_MC_5TeV/IdSF/mc16_5TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e4916_s3238_r10243_r10210_p3665.root
+Wplusenu5_IsoSF    :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusenu_MC_5TeV/IsoSF/mc16_5TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e4916_s3238_r10243_r10210_p3665.root
+Wplusenu5_recoSF   :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusenu_MC_5TeV/recoSF/mc16_5TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e4916_s3238_r10243_r10210_p3665.root
+Wplusenu5_TrigSF   :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusenu_MC_5TeV/TrigSF/mc16_5TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e4916_s3238_r10243_r10210_p3665.root
+
+Wplusmunu5_IsoSF   :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusmunu_MC_5TeV/IsoSF/mc16_5TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e4916_s3238_r10243_r10210_p3665.root
+Wplusmunu5_recoSF  :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusmunu_MC_5TeV/recoSF/mc16_5TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e4916_s3238_r10243_r10210_p3665.root
+Wplusmunu5_TrigSF  :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wplusmunu_MC_5TeV/TrigSF/mc16_5TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e4916_s3238_r10243_r10210_p3665.root
+
+Wminusenu5_IdSF    :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusenu_MC_5TeV/IdSF/mc16_5TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e4916_s3238_r10243_r10210_p3665.root
+Wminusenu5_IsoSF   :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusenu_MC_5TeV/IsoSF/mc16_5TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e4916_s3238_r10243_r10210_p3665.root
+Wminusenu5_recoSF  :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusenu_MC_5TeV/recoSF//mc16_5TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e4916_s3238_r10243_r10210_p3665.root
+Wminusenu5_TrigSF  :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusenu_MC_5TeV/TrigSF/mc16_5TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e4916_s3238_r10243_r10210_p3665.root
+
+Wminusmunu5_IsoSF  :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusmunu_MC_5TeV/IsoSF/mc16_5TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e4916_s3238_r10243_r10210_p3665.root
+Wminusmunu5_recoSF :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusmunu_MC_5TeV/recoSF/mc16_5TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e4916_s3238_r10243_r10210_p3665.root
+Wminusmunu5_TrigSF :  /eos/user/h/hatmani/DataSets/DataSets_5TeV/pTWanalysis_2DUnfo_wminusmunu_MC_5TeV/TrigSF/mc16_5TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e4916_s3238_r10243_r10210_p3665.root
+
+Wplusenu13_IdSF     :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusenu_MC_13TeV/IdSF/mc16_13TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e3601_s3126_r10244+r11165_p3665.root
+Wplusenu13_IsoSF    :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusenu_MC_13TeV/IsoSF/mc16_13TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e3601_s3126_r10244+r11165_p3665.root
+Wplusenu13_recoSF   :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusenu_MC_13TeV/recoSF/mc16_13TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e3601_s3126_r10244+r11165_p3665.root
+Wplusenu13_TrigSF   :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusenu_MC_13TeV/TrigSF/mc16_13TeV.361100.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusenu.e3601_s3126_r10244+r11165_p3665.root
+
+Wplusmunu13_IsoSF   :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusmunu_MC_13TeV/IsoSF/mc16_13TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e3601_s3126_r10244+r11165_p3665.root
+Wplusmunu13_recoSF  :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusmunu_MC_13TeV/recoSF/mc16_13TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e3601_s3126_r10244+r11165_p3665.root
+Wplusmunu13_TrigSF  :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wplusmunu_MC_13TeV/TrigSF/mc16_13TeV.361101.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wplusmunu.e3601_s3126_r10244+r11165_p3665.root
+
+Wminusenu13_IdSF    :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusenu_MC_13TeV/IdSF/mc16_13TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e3601_s3126_r10244+r11165_p3665.root
+Wminusenu13_IsoSF   :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusenu_MC_13TeV/IsoSF/mc16_13TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e3601_s3126_r10244+r11165_p3665.root
+Wminusenu13_recoSF  :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusenu_MC_13TeV/recoSF/mc16_13TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e3601_s3126_r10244+r11165_p3665.root
+Wminusenu13_TrigSF  :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusenu_MC_13TeV/TrigSF/mc16_13TeV.361103.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusenu.e3601_s3126_r10244+r11165_p3665.root
+
+Wminusmunu13_IsoSF  :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusmunu_MC_13TeV/IsoSF/mc16_13TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e3601_s3126_r10244+r11165_p3665.root
+Wminusmunu13_recoSF :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusmunu_MC_13TeV/recoSF/mc16_13TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e3601_s3126_r10244+r11165_p3665.root
+Wminusmunu13_TrigSF :  /eos/user/h/hatmani/DataSets/DataSets_13TeV/pTWanalysis_2DUnfo_wminusmunu_MC_13TeV/TrigSF/mc16_13TeV.361104.PowhegPythia8EvtGen_AZNLOCTEQ6L1_Wminusmunu.e3601_s3126_r10244+r11165_p3665.root
+
+
+

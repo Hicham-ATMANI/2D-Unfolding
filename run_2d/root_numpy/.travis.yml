@@ -1,0 +1,35 @@
+# travis-ci.org build & test configuration
+sudo: required
+dist: trusty
+#sudo: false
+language: python
+
+matrix:
+    include:
+        - env: PYTHON=2.7 COVERAGE=1
+        - env: PYTHON=3.6 COVERAGE=1
+        - env: PYTHON=3.7 COVERAGE=1
+
+#install: source ci/install.sh
+install:
+  - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then curl --silent http://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh -o miniconda.sh; fi
+  - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then wget -nv http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; fi
+
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a # Useful for debugging any issues with conda
+  - conda config --add channels conda-forge
+  - conda create -q -n testenv python=${PYTHON} root=6.14 nose sphinx
+  - export CONDA_ENV_PATH=$HOME/miniconda/envs/testenv
+  - source activate testenv
+  - pip install coverage coveralls
+
+script: bash ci/test.sh
+after_success:
+    - time coveralls
+
+notifications:
+    email: false

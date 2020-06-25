@@ -1,0 +1,263 @@
+#!/usr/bin/env python
+# -*-coding:Latin-1 -* 
+
+import ROOT
+import ROOT as root
+from   ROOT import TF1, TH2D, TFile
+from   ROOT import RooUnfoldResponse
+from   ROOT import RooUnfoldBayes
+from   math import *
+
+def GetSystematic(InputSyst, reco_hist, mig_hist, Channel, Energy, Variable, Syst, Niter):
+
+	# read the variation from the input files:
+	Variation_1D_down = []
+        Variation_2D_down = []
+
+	DireName       = Channel + "Selection_WeightVariations"
+	Hist1DName     = "WpT_Reco_v_Truth_" + str(Energy) + "TeV_cut7"
+	Hist2DName     = "WpT_Reco_cut7"
+	
+ 	directory 	= InputSyst.GetDirectory( DireName )
+
+        for key in directory.GetListOfKeys():
+            hist = key.ReadObj()
+            if ((hist.GetName()).find("sumEt") == -1 and (hist.GetName()).find("coarseHigh") == -1 and (hist.GetName()).find('_down') != -1 ):
+               if ( hist.ClassName() == 'TH1F' and (hist.GetName()).find(Variable) != -1 and (hist.GetName()).find(Syst) != -1 ):
+		  Variation_1D_down.append(hist)
+               if ( hist.ClassName() == 'TH2F' and (hist.GetName()).find(Variable) != -1 and (hist.GetName()).find(Syst) != -1 and (hist.GetName()).find("finerT") == -1 ):
+		  Variation_2D_down.append(hist)
+	
+	# Add variation to Nominal and apply efficiency corrections:
+
+	for i in range(0, len( Variation_1D_down )):
+	     Variation_1D_down[i].Add(reco_hist)
+	     Variation_1D_down[i] = ApplyEffecciency(Variation_1D_down[i], reco_hist, mig_hist)
+
+	# Get reco, migration, data with Syst File
+	reco_Syst     = RecoDistribution( InputSyst, Channel, Variable)
+	mig_hist_Syst = MigrationMatrix(  InputSyst, Channel, str(Energy), Variable)
+
+	# correct the reco distribution:
+	reco_hist_Eff = (mig_hist.ProjectionX()).Clone("reco_hist_Eff")
+
+	# define the response matrix for Syst unfo
+	response_Syst = RooUnfoldResponse(0, 0, mig_hist_Syst, "UNFOLD", "UNFOLD");	
+
+	# Calculate the Syst:
+	Systematics = []
+
+	for i in range(1, 1 + Niter ):	
+
+	    unfoldMCNominal  = RooUnfoldBayes (response_Syst, reco_hist_Eff, i)	
+	    HistoNominal     = unfoldMCNominal.Hreco()
+	
+	    unfoldedSys_down = GetUnfoldToys(response_Syst, Variation_1D_down, i)
+	    Systematic_down  = GetSystematics(HistoNominal, unfoldedSys_down)	
+
+	    Systematics.append(Systematic_down)
+	
+	return Systematics
+
+
+def GetSystematics( HistoNominal, unfoldedSys_down):
+		
+	HistSyst = HistoNominal.Clone("HistSyst")
+	
+	for i in range(1, 1 + HistoNominal.GetNbinsX()):
+	    difference = 0
+	    for j in range(0, len(unfoldedSys_down) ):
+		if( HistoNominal.GetBinContent(i) != 0):
+		    difference = difference + (( unfoldedSys_down[j].GetBinContent(i) - HistoNominal.GetBinContent(i)) / HistoNominal.GetBinContent(i))*(( unfoldedSys_down[j].GetBinContent(i) - HistoNominal.GetBinContent(i)) / HistoNominal.GetBinContent(i))
+	    HistSyst.SetBinContent(i, 100*sqrt(difference))
+	    HistSyst.SetBinError(i, 0)
+
+def ApplyEffecciency( data_hist, reco_hist, mig_hist):
+
+        Efficiency_hist = (mig_hist.ProjectionX()).Clone("Efficiency_hist")
+        Efficiency_hist.Divide(reco_hist)
+
+        for i in range(1, 1 + reco_hist.GetNbinsX()):
+	    data_hist.SetBinContent(i, data_hist.GetBinContent(i)*Efficiency_hist.GetBinContent(i) )	
+        return data_hist
+	
+
+def GetCovarianceMatrix(unfoldDATA, UnfoldToys, VarMin, VarMax):
+
+	ntbins   = unfoldDATA.GetNbinsX()
+	xaxis    = unfoldDATA.GetXaxis()
+	CovMatrix = TH2D("Toy_2DCovariance", "Toy_2DCovariance", ntbins, xaxis.GetXbins().GetArray(), ntbins, xaxis.GetXbins().GetArray())
+	
+	for i in range(1, 1 + ntbins ):
+	    for j in range(1, 1 + ntbins ):
+		MatrixValue = 0
+		for k in range(0, len( UnfoldToys )):
+		    MatrixValue = MatrixValue + ( (UnfoldToys[k].GetBinContent(i) - unfoldDATA.GetBinContent(i)) * (UnfoldToys[k].GetBinContent(j) - unfoldDATA.GetBinContent(j)) )
+		CovMatrix.SetBinContent(i, j, MatrixValue/len(UnfoldToys))
+		CovMatrix.GetXaxis().SetRangeUser(VarMin, VarMax)
+                CovMatrix.GetYaxis().SetRangeUser(VarMin, VarMax)
+
+	return CovMatrix		
+
+
+def GetUnfoldToys(responseM, ToysOfData, Niter):
+	UnfoldToys = []
+
+	for i in range(0, len(ToysOfData)):
+	    unfoldToy = RooUnfoldBayes (responseM, ToysOfData[i], Niter)
+	    UnfoldToys.append( unfoldToy.Hreco() )    
+
+	return UnfoldToys
+
+def GetToysofData(fInput_Data_BS, Channel, Variable, Energy):
+	ToysOfData = []
+	director =  fInput_Data_BS.GetDirectory( Channel+"Selection_WeightVariations" )
+	if(Variable == "WpT"): Variable = Variable + "_Reco"
+        for key in director.GetListOfKeys():
+            hist = key.ReadObj()
+            if hist.ClassName() == 'TH1F' :
+                if not ((hist.GetName()).find( Variable + "_cut7_toy")):
+		       #print(hist.GetName())
+                       ToysOfData.append(hist)
+	return ToysOfData
+
+def GetTheBias(responseM, dataCorrected, mig_hist, Niteration, VarMin, VarMax, Channel, Energy, Variable):
+
+	# clone the nominal plots
+	truth_hist 	    = (mig_hist.ProjectionY()).Clone("truth_hist")
+        truth_hist_Weighted = (mig_hist.ProjectionY()).Clone("truth_hist_Weighted")
+	reco_hist	    = (mig_hist.ProjectionX()).Clone("reco_hist")
+        reco_hist_Weighted  = (mig_hist.ProjectionX()).Clone("reco_hist_Weighted")
+  	Response     	    = (mig_hist.Clone("Response")).Clone("Response")
+
+	RatioData  = dataCorrected.Clone("RatioData")
+	RatioMC	   = (mig_hist.ProjectionX()).Clone("RatioMC")
+	Bias       = (mig_hist.ProjectionY()).Clone("Bias")
+
+	# fit the ratio data/MC
+	RatioData.Divide(RatioMC)
+	f1 = TF1("f1","pol9", VarMin, VarMax)
+	RatioData.Fit("f1")
+
+	# reweight the truth distributions:
+	for i in range(1, 1 + truth_hist.GetNbinsX()):
+	      truth_hist_Weighted.SetBinContent(i, truth_hist.GetBinContent(i) * f1.Eval( truth_hist.GetXaxis().GetBinCenter(i) ) )
+	      truth_hist_Weighted.SetBinError(i,   truth_hist.GetBinError(i))
+	
+	# calculate the response matrix:
+        for i in range(1, 1 + reco_hist.GetNbinsX()):
+	    for j in range(1, 1 + truth_hist.GetNbinsX()):
+		if( truth_hist.GetBinContent(i) != 0): Response.SetBinContent(i, j, mig_hist.GetBinContent(i,j) / truth_hist.GetBinContent(j) )
+                if( truth_hist.GetBinContent(i) == 0): Response.SetBinContent(i, j, mig_hist.GetBinContent(i,j) )
+	
+	# calculte the reco_weighted
+        for i in range(1, 1 + reco_hist.GetNbinsX()):
+	    ElemV = 0
+	    for j in range(1, 1 + truth_hist.GetNbinsX()):
+	  	ElemV = ElemV + Response.GetBinContent(i, j) * truth_hist_Weighted.GetBinContent(j)
+	    reco_hist_Weighted.SetBinContent(i, ElemV)		
+            reco_hist_Weighted.SetBinError(i,   reco_hist.GetBinError(i)) 
+	
+	# define the covariance matrix:
+	ntbins = truth_hist.GetNbinsX()
+	xaxis  = truth_hist.GetXaxis()
+	CovMatrix = TH2D("Covariance", "Covariance" , ntbins,  xaxis.GetXbins().GetArray(), ntbins, xaxis.GetXbins().GetArray())
+
+	# define the output:
+	OutputFile = TFile("output_"+Channel+str(Energy)+"/"+Variable+"/Bias_"+Channel+str(Energy)+".root",'RECREATE')
+	truth_hist.Write("truth_hist")
+	truth_hist_Weighted.Write("truth_hist_Weighted")
+	reco_hist.Write("reco_hist")
+	reco_hist_Weighted.Write("reco_hist_Weighted")
+	
+	# Calculate the Bias
+	for i in range(1, 1 + Niteration):
+	    unfoldMC    = RooUnfoldBayes (responseM, reco_hist_Weighted, i)
+	    UnfoldHisto = unfoldMC.Hreco()
+	    Bias.Add(truth_hist_Weighted, UnfoldHisto, 1, -1)
+	    for j in range(1, 1 + truth_hist.GetNbinsX()):
+		for k in range(1, 1 + truth_hist.GetNbinsX()):
+		    CovMatrix.SetBinContent(j, k, Bias.GetBinContent(j)*Bias.GetBinContent(k))
+	    for j in range(1, 1 + truth_hist.GetNbinsX()):
+		if( truth_hist_Weighted.GetBinContent(j) != 0 ):
+		    Bias.SetBinContent( j,100*Bias.GetBinContent(j) / truth_hist_Weighted.GetBinContent(j) ) 
+		    Bias.SetBinError(j,0)
+	
+	    Bias.GetXaxis().SetRangeUser(VarMin, VarMax)
+	    CovMatrix.GetXaxis().SetRangeUser(VarMin, VarMax)
+            CovMatrix.GetYaxis().SetRangeUser(VarMin, VarMax)
+	    Bias.Write("Bias_Iter_"+str(i))
+	    CovMatrix.Write("CovMatrix_Iter_"+str(i))    
+	
+
+def SumBackground(Input_Bkgd1, Input_Bkgd2, Input_Bkgd3, Input_Bkgd5, Input_Bkgd4, Channel, Var ):
+
+	Background_W        = Input_Bkgd1.Get(  Channel + "Selection/" +  Var + "_cut7" )
+	Background_Z        = Input_Bkgd2.Get(  Channel + "Selection/" +  Var + "_cut7" )
+	Background_Dilepton = Input_Bkgd3.Get(  Channel + "Selection/" +  Var + "_cut7" )
+	Background_Top      = Input_Bkgd5.Get(  Channel + "Selection/" +  Var + "_cut7" )
+	Background_Mj       = Input_Bkgd4.Get(  "hist/" +  Var + "_cut7" )
+
+	Background_Total    = Background_W.Clone("Background_Total")
+	Background_Total.Add(Background_Z)
+	Background_Total.Add(Background_Dilepton)
+	Background_Total.Add(Background_Top)
+	Background_Total.Add(Background_Mj)
+
+	print("Sum the background ditributions: Done")
+	return Background_Total
+
+
+def MigrationMatrix( fInput_MC, Channel, Energy, Var):
+	if( Var == "elEta" ):
+        	mig_hist      = fInput_MC.Get( Channel + "Selection/el_Eta_Reco_v_Truth_"+ str(Energy)  +"TeV_cut7")
+	else:
+        	mig_hist      = fInput_MC.Get( Channel + "Selection/"+ Var +"_Reco_v_Truth_"+ str(Energy)  +"TeV_cut7")
+        print("Get the migration Matrix: Done")
+        return mig_hist
+
+
+def TruthDistribution( fInput_MC, Var, Energy):
+	if( Var == "WpT" ):
+        	truth_hist    = fInput_MC.Get( "TruthSelection/"+ Var +"_Truth_" + str(Energy) + "TeV_cut4" )
+	else:
+        	truth_hist    = fInput_MC.Get( "TruthSelection/"+ Var +"_Truth_cut4" )
+        print("Get the Truth Distribution: Done")
+	return truth_hist
+
+
+def RecoDistribution( fInput_MC, Channel, Var):
+        if( Var == "WpT" ): 
+		Var = Var + "_Reco"	
+        reco_hist     = fInput_MC.Get( Channel + "Selection/"+ Var + "_cut7" )
+
+        print("Get the Reco Distribution: Done")
+	return reco_hist
+
+def GetAcceptance( mig_hist, truth_hist):
+	Acceptance_hist = (mig_hist.ProjectionY()).Clone("Acceptance_hist")
+	Acceptance_hist.Divide(truth_hist)
+	print("Get the Acceptance Corrections: Done")
+	return Acceptance_hist
+
+def GetEfficieny( mig_hist, reco_hist):
+        Efficiency_hist = (mig_hist.ProjectionX()).Clone("Efficiency_hist")
+        Efficiency_hist.Divide(reco_hist)
+        print("Get the Efficiency Corrections: Done")
+        return Efficiency_hist
+
+def CorrectData( data_hist, reco_hist, Background_Total, Efficiency_hist):
+
+	dataCorrected = data_hist.Clone("dataCorrected")
+
+	for i in range(1, 1 + reco_hist.GetNbinsX()):
+	    if(reco_hist.GetBinContent(i) != 0):
+	   	rapportBGMC = (Background_Total.GetBinContent(i) / (reco_hist.GetBinContent(i)+Background_Total.GetBinContent(i)))
+		dataCorrected.SetBinContent(i, data_hist.GetBinContent(i)*(1-rapportBGMC))
+
+	for i in range(1, 1 + dataCorrected.GetNbinsX()):
+	    dataCorrected.SetBinContent(i, dataCorrected.GetBinContent(i)*Efficiency_hist.GetBinContent(i) )
+
+        print("Correct data and subtract background: Done")
+
+	return dataCorrected
