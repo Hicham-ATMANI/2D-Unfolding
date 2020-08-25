@@ -9,7 +9,7 @@ python run_2d/Unfolding.py
 ```
 What it does:
 ```
-This framwork is used for the calculation of the double differential cross sections using the unfolded distributions, The approach used in this analysis consist of transforming the 2D unfolding to 1D unfolding, principally by changing the migration matrix. This framework allows to:
+This framwork is used for the calculation of the double differential cross sections using the unfolded distributions, the approach used in this analysis consist of transforming the 2D unfolding to 1D unfolding, principally by changing the migration matrix. This framework allows to:
 
 - Make control plots comparing data and simulation:
 
